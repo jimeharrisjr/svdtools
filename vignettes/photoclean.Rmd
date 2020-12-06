@@ -1,0 +1,51 @@
+---
+title: "photoclean"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{photoclean}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(svdtools)
+```
+
+Single Value Decomposition can remove noise from matrices in the process of reducing them. One example is image filtering. The included data object _noisymatrix_ is one such example. This is a grayscale image of Linux Penguin on Wikimedia Commons from Larry Ewing <lewing@isc.tamu.edu>. At random, some pixels have been deleted, creating noise.
+```{r, echo=FALSE}
+image(noisymatrix, col=gray.colors(65536))
+```
+
+There are several ways we could filter this image to try to remove the impact of the bad pixels. Let's examine the explanation plots.
+
+```{r}
+plot_explanation(noisymatrix, limit=.99)
+```
+
+There are a lot of components to play with. One brute force way of doing this would be to try specifying some percentage of components to keep. We could try 98%:
+```{r}
+m<-reduce_percentage(noisymatrix, .98)
+image(m, col=gray.colors(65536))
+```
+This image is obviously overfiltered. Instead, we could simply eliminate all the components above some threshold - for example, discard 51-411:
+```{r}
+# Keep the first 50 components
+m<-reduce_components(noisymatrix, 50)
+image(m, col=gray.colors(65536))
+```
+
+This looks significantly better, but we could try tuning the image to keep more of the data, and removing only a block of components. We can try excluding 51-250:
+```{r}
+m<-exclude_components(noisymatrix,51:250)
+image(m, col=gray.colors(65536))
+
+```
+
+In this way, we can gradually select between the level of sharpness and the level of noise we retain!

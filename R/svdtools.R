@@ -25,8 +25,8 @@ reduce_components<-function(mat, n=1){
   # Check to see if it is numeric, or if coercion to numeric results in NAs
   isnum<-mean(apply(mat,c(1,2),is.numeric))
   if (isnum<1){
-    warning('Matrix is not numeric. Attempting to coerce.')
-    mat<-apply(mat,c(1,2), as.numeric)
+    message('Matrix is not numeric. Attempting to coerce.')
+    mat<-suppressWarnings(apply(mat,c(1,2), as.numeric))
     isna<-mean(apply(mat,c(1,2), is.na))
     if(isna>0) stop('Object not coercible to a numeric matrix.')
   }
@@ -60,7 +60,11 @@ reduce_components<-function(mat, n=1){
 #' @export
 reduce_percentage<-function(mat, p=.9){
   # is 0 < p <= 1?
-  if (!p >0 | p>1) stop("Invalid value for p. Use a value 0 < p <= 1")
+  if (!p >0) stop("Invalid value for p. Use a value 0 < p <= 1")
+  if (p>1) {
+    warning('p > 1. Resetting to 1')
+    p<-1
+  }
   # First check the class of the mat object to see if it is a data frame, attempt coercion if so
   if (grepl('data.frame', class(mat))) {
     message('Object is a data frame. Attempting coersion')
@@ -72,7 +76,7 @@ reduce_percentage<-function(mat, p=.9){
   isnum<-mean(apply(mat,c(1,2),is.numeric))
   if (isnum<1){
     warning('Matrix is not numeric. Attempting to coerce.')
-    mat<-apply(mat,c(1,2), as.numeric)
+    mat<-suppressWarnings(apply(mat,c(1,2), as.numeric))
     isna<-mean(apply(mat,c(1,2), is.na))
     if(isna>0) stop('Object not coercible to a numeric matrix.')
   }
@@ -81,6 +85,7 @@ reduce_percentage<-function(mat, p=.9){
   sv<-(matsvd$d^2)/sum(matsvd$d^2)
   # find the first component which adds up to, or exceeds the percentage specified
   n<-which(cumsum(sv)>=p)[1]
+  if(is.na(n)) n<-length(sv)
   if (n==1){
     m<-matsvd$u[,1]%*%t(matsvd$v[,1])*matsvd$d[1]
   } else {
@@ -193,9 +198,8 @@ exclude_components<-function(mat, exclude=2:num_components(mat)){
 #' @examples
 #'
 #'# Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
-#' image(noisymatrix, col=gray.colors(65536))
-#' cleanmatrix<-exclude_components(noisymatrix,50:250)
-#' image(cleanmatrix, col=gray.colors(65536))
+#'
+#' plot_explanation(noisymatrix, limit=.99)
 #'
 #' @export
 plot_explanation<-function(mat, limit=NULL){

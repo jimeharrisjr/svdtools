@@ -1,0 +1,58 @@
+---
+title: "waterfall_filter"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{waterfall_filter}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(svdtools)
+```
+
+The svdtools package can be used to filter noise from various matrices. One example would be a "waterfall" plot - a plot of multiple time- or frequency-series lines in a 2-D matrix. To simulate this, we create a matrix with two combined sine waves of different frequencies, both with gaussian noise added, then use the base image function to display the transform of the waterfall (to orient the picture correctly)
+
+```{r}
+# Create a matrix 320x240, and fill each row with overlapping, noisy sine waves
+m<-matrix(0,ncol=320, nrow = 240)
+t <- seq(0,4*pi,,ncol(m))
+t2 <- seq(0,6*pi,,ncol(m))
+m<-t(apply(m,1,function(x){x+(sin(8*t)+rnorm(ncol(m),sd=.5))+(sin(8*t2)+rnorm(ncol(m),sd=.5))}))
+image(t(m), col=gray.colors(65535))
+```
+
+
+The waterfall produced is noisy. If we plot a single row of the matrix, the two sine waves are difficult to discern.
+
+```{r}
+plot(m[1,], type='l', main='Noisy Combined Sine Waves')
+```
+
+But let's examine where most of the information in this matrix is carried:
+
+```{r}
+plot_explanation(m)
+```
+Most of the information is carried in the first component. We can use Single Value Decomposition to remove unwanted components and try to clean up the waterfall.
+
+```{r}
+# Reduce the matrix to only it's first (principle) component
+m2<-reduce_components(m,1)
+image(t(m2), col = gray.colors(65535))
+```
+
+The noise has been reduced. Let's look at what a single row of the waterfall looks like:
+```{r}
+plot(m2[1,], type='l', main = 'Cleaned Signal')
+```
+The new signal is substantially more recognizable!
+
+
