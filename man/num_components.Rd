@@ -18,8 +18,8 @@ Take a numerical matrix and return the number of SVD components available to red
 \examples{
 
 # Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
-
+\dontrun{
 print(num_components(noisymatrix))
-
+}
 
 }

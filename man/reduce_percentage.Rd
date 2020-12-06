@@ -18,10 +18,11 @@ A matrix or an error if the inputs are illogical
 Take a numerical matrix and return a matrix produced only from the percentage of variance explained
 }
 \examples{
-
 # Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
+\dontrun{
+
 image(noisymatrix, col=gray.colors(65536))
 cleanmatrix<-reduce_percentage(noisymatrix,.988)
 image(cleanmatrix, col=gray.colors(65536))
-
+}
 }

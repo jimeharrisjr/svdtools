@@ -20,8 +20,9 @@ Take a numerical matrix and return a matrix produced by leaving out specified co
 \examples{
 
 # Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
+\dontrun{
 image(noisymatrix, col=gray.colors(65536))
 cleanmatrix<-exclude_components(noisymatrix,50:250)
 image(cleanmatrix, col=gray.colors(65536))
-
+}
 }

@@ -9,10 +9,11 @@
 #' @examples
 #'
 #'# Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
+#'\dontrun{
 #' image(noisymatrix, col=gray.colors(65536))
 #' cleanmatrix<-reduce_components(noisymatrix,50)
 #' image(cleanmatrix, col=gray.colors(65536))
-#'
+#'}
 #' @export
 reduce_components<-function(mat, n=1){
   # First check the class of the mat object to see if it is a data frame, attempt coercion if so
@@ -51,12 +52,13 @@ reduce_components<-function(mat, n=1){
 #' @param p Numeric value such that 0 < p <= 1. Defaults to .9
 #' @return A matrix or an error if the inputs are illogical
 #' @examples
+#' # Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
+#'\dontrun{
 #'
-#'# Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
 #' image(noisymatrix, col=gray.colors(65536))
 #' cleanmatrix<-reduce_percentage(noisymatrix,.988)
 #' image(cleanmatrix, col=gray.colors(65536))
-#'
+#'}
 #' @export
 reduce_percentage<-function(mat, p=.9){
   # is 0 < p <= 1?
@@ -104,9 +106,9 @@ reduce_percentage<-function(mat, p=.9){
 #' @examples
 #'
 #'# Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
-#'
+#'\dontrun{
 #' print(num_components(noisymatrix))
-#'
+#'}
 #'
 #' @export
 num_components<-function(mat){
@@ -140,10 +142,11 @@ num_components<-function(mat){
 #' @examples
 #'
 #'# Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
+#'\dontrun{
 #' image(noisymatrix, col=gray.colors(65536))
 #' cleanmatrix<-exclude_components(noisymatrix,50:250)
 #' image(cleanmatrix, col=gray.colors(65536))
-#'
+#'}
 #' @export
 exclude_components<-function(mat, exclude=2:num_components(mat)){
   numComp<-num_components(mat)
@@ -198,9 +201,11 @@ exclude_components<-function(mat, exclude=2:num_components(mat)){
 #' @examples
 #'
 #'# Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
-#'
+#'\dontrun{
 #' plot_explanation(noisymatrix, limit=.99)
+#'}
 #'
+#' @importFrom graphics par plot
 #' @export
 plot_explanation<-function(mat, limit=NULL){
   #Check to see if limit is there & makes sense
@@ -237,8 +242,17 @@ plot_explanation<-function(mat, limit=NULL){
   num_components<-1:n
   cumulative<-cumulative[1:n]
   percent_explained<-percent_explained[1:n]
-  op<-par(mfrow=c(2,1), mar=c(1,1,1,1))
-  plot(x=num_components,y=percent_explained, type='b', pch=16, main = sprintf('Percent by component. Total components=%d',total))
-  plot(x=num_components, y=cumulative, type='b',pch=16, main = sprintf('Cumulative Sum Percent by component. Total components=%d',total))
-  par(op)
+  op<-graphics::par(mfrow=c(2,1), mar=c(1,1,1,1))
+  graphics::plot(x=num_components,y=percent_explained, type='b', pch=16, main = sprintf('Percent by component. Total components=%d',total))
+  graphics::plot(x=num_components, y=cumulative, type='b',pch=16, main = sprintf('Cumulative Sum Percent by component. Total components=%d',total))
+  graphics::par(op)
 }
+
+#' A numerical matrix of the Linux logo with noise added
+#'
+#' A dataset containing the grayscale image of the linux logo with noise added from Wikimedia Commons Attribution: Larry Ewing <lewing@isc.tamu.edu>
+#'
+#' @format A Matrix with 421 rows and 500 columns:
+#
+#' @source \url{https://isc.tamu.edu/~lewing/linux/}
+"noisymatrix"

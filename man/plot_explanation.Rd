@@ -20,7 +20,8 @@ Take a numerical matrix and plot the variance explained by the components
 \examples{
 
 # Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
-
+\dontrun{
 plot_explanation(noisymatrix, limit=.99)
+}
 
 }

@@ -20,8 +20,9 @@ Take a numerical matrix and return a matrix produced only from the number of com
 \examples{
 
 # Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
+\dontrun{
 image(noisymatrix, col=gray.colors(65536))
 cleanmatrix<-reduce_components(noisymatrix,50)
 image(cleanmatrix, col=gray.colors(65536))
-
+}
 }
