@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(svdtools)
+library(graphics)
 ```
 
 The svdtools package can be used to filter noise from various matrices. One example would be a "waterfall" plot - a plot of multiple time- or frequency-series lines in a 2-D matrix. To simulate this, we create a matrix with two combined sine waves of different frequencies, both with gaussian noise added, then use the base image function to display the transform of the waterfall (to orient the picture correctly)
