@@ -20,8 +20,7 @@ Take a numerical matrix and plot the variance explained by the components
 \examples{
 
 # Uses matrix made from the Linux Penguin: Attribution: Larry Ewing <lewing@isc.tamu.edu>
-image(noisymatrix, col=gray.colors(65536))
-cleanmatrix<-exclude_components(noisymatrix,50:250)
-image(cleanmatrix, col=gray.colors(65536))
+
+plot_explanation(noisymatrix, limit=.99)
 
 }
