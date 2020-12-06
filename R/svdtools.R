@@ -237,7 +237,7 @@ plot_explanation<-function(mat, limit=NULL){
   num_components<-1:n
   cumulative<-cumulative[1:n]
   percent_explained<-percent_explained[1:n]
-  op<-par(mfrow=c(2,1))
+  op<-par(mfrow=c(2,1), mar=c(1,1,1,1))
   plot(x=num_components,y=percent_explained, type='b', pch=16, main = sprintf('Percent by component. Total components=%d',total))
   plot(x=num_components, y=cumulative, type='b',pch=16, main = sprintf('Cumulative Sum Percent by component. Total components=%d',total))
   par(op)
