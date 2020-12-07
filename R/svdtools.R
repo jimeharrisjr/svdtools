@@ -17,7 +17,7 @@
 #' @export
 reduce_components<-function(mat, n=1){
   # First check the class of the mat object to see if it is a data frame, attempt coercion if so
-  if (grepl('data.frame', class(mat))) {
+  if ('data.frame' %in% class(mat)) {
     message('Object is a data frame. Attempting coersion')
     mat<-as.matrix(mat)
   }
@@ -68,7 +68,7 @@ reduce_percentage<-function(mat, p=.9){
     p<-1
   }
   # First check the class of the mat object to see if it is a data frame, attempt coercion if so
-  if (grepl('data.frame', class(mat))) {
+  if ('data.frame' %in% class(mat)) {
     message('Object is a data frame. Attempting coersion')
     mat<-as.matrix(mat)
   }
@@ -112,7 +112,7 @@ reduce_percentage<-function(mat, p=.9){
 #'
 #' @export
 num_components<-function(mat){
-  if (grepl('data.frame', class(mat))) {
+  if ('data.frame' %in% class(mat)) {
     message('Object is a data frame. Attempting coersion')
     mat<-as.matrix(mat)
   }
@@ -160,7 +160,7 @@ exclude_components<-function(mat, exclude=2:num_components(mat)){
   }
 
   # First check the class of the mat object to see if it is a data frame, attempt coercion if so
-  if (grepl('data.frame', class(mat))) {
+  if ('data.frame' %in% class(mat)) {
     message('Object is a data frame. Attempting coersion')
     mat<-as.matrix(mat)
   }
@@ -218,7 +218,7 @@ plot_explanation<-function(mat, limit=NULL){
     limit<-1
   }
   # First check the class of the mat object to see if it is a data frame, attempt coercion if so
-  if (grepl('data.frame', class(mat))) {
+  if ('data.frame' %in% class(mat)) {
     message('Object is a data frame. Attempting coersion')
     mat<-as.matrix(mat)
   }
