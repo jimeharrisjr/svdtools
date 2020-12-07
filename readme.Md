@@ -11,6 +11,12 @@ Single Value Decomposition is a useful tool for the analysis and filtering of ma
 - Filtering collections of signal trace spectra to remove noise
 - Preventing overfitting in tensorflow models with limited training data
 
+### Installing
+Install svdtools from Github using devtools:
+``` r
+devtools::install_github('https://github.com/jimeharrisjr/svdtools')
+```
+
 ### Usage Examples
 
 Single Value Decomposition can remove noise from matrices in the process of reducing them. One example is image filtering. The included data object _noisymatrix_ is one such example. This is a grayscale image of Linux Penguin on Wikimedia Commons from Larry Ewing <lewing@isc.tamu.edu>. At random, some pixels have been deleted, creating noise.
