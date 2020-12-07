@@ -27,7 +27,7 @@ image(noisymatrix, col=gray.colors(65536))
 There are several ways we could filter this image to try to remove the impact of the bad pixels. Let's examine the explanation plots.
 
 ```{r}
-plot_explanation(noisymatrix, limit=.99)
+#plot_explanation(noisymatrix, limit=.99)
 ```
 
 There are a lot of components to play with. One brute force way of doing this would be to try specifying some percentage of components to keep. We could try 98%:

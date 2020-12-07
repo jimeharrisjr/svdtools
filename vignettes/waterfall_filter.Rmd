@@ -40,7 +40,7 @@ plot(m[1,], type='l', main='Noisy Combined Sine Waves')
 But let's examine where most of the information in this matrix is carried:
 
 ```{r}
-plot_explanation(m)
+#plot_explanation(m)
 ```
 Most of the information is carried in the first component. We can use Single Value Decomposition to remove unwanted components and try to clean up the waterfall.
 
