@@ -22,7 +22,7 @@ reduce_components<-function(mat, n=1){
     mat<-as.matrix(mat)
   }
   # if the resulting object is not a matrix, stop
-  if (class(mat)!='matrix') stop('Input must be a numerical matrix, or coercible to a numerical matrix')
+  if (!'matrix' %in% class(mat)) stop('Input must be a numerical matrix, or coercible to a numerical matrix')
   # Check to see if it is numeric, or if coercion to numeric results in NAs
   isnum<-mean(apply(mat,c(1,2),is.numeric))
   if (isnum<1){
@@ -73,7 +73,7 @@ reduce_percentage<-function(mat, p=.9){
     mat<-as.matrix(mat)
   }
   # if the resulting object is not a matrix, stop
-  if (class(mat)!='matrix') stop('Input must be a numerical matrix, or coercible to a numerical matrix')
+  if (!'matrix' %in% class(mat)) stop('Input must be a numerical matrix, or coercible to a numerical matrix')
   # Check to see if it is numeric, or if coercion to numeric results in NAs
   isnum<-mean(apply(mat,c(1,2),is.numeric))
   if (isnum<1){
@@ -117,7 +117,7 @@ num_components<-function(mat){
     mat<-as.matrix(mat)
   }
   # if the resulting object is not a matrix, stop
-  if (class(mat)!='matrix') stop('Input must be a numerical matrix, or coercible to a numerical matrix')
+  if (!'matrix' %in% class(mat)) stop('Input must be a numerical matrix, or coercible to a numerical matrix')
   # Check to see if it is numeric, or if coercion to numeric results in NAs
   isnum<-mean(apply(mat,c(1,2),is.numeric))
   if (isnum<1){
@@ -165,7 +165,7 @@ exclude_components<-function(mat, exclude=2:num_components(mat)){
     mat<-as.matrix(mat)
   }
   # if the resulting object is not a matrix, stop
-  if (class(mat)!='matrix') stop('Input must be a numerical matrix, or coercible to a numerical matrix')
+  if (!'matrix' %in% class(mat)) stop('Input must be a numerical matrix, or coercible to a numerical matrix')
   # Check to see if it is numeric, or if coercion to numeric results in NAs
   isnum<-mean(apply(mat,c(1,2),is.numeric))
   if (isnum<1){
@@ -223,7 +223,7 @@ plot_explanation<-function(mat, limit=NULL){
     mat<-as.matrix(mat)
   }
   # if the resulting object is not a matrix, stop
-  if (class(mat)!='matrix') stop('Input must be a numerical matrix, or coercible to a numerical matrix')
+  if (!'matrix' %in% class(mat)) stop('Input must be a numerical matrix, or coercible to a numerical matrix')
   # Check to see if it is numeric, or if coercion to numeric results in NAs
   isnum<-mean(apply(mat,c(1,2),is.numeric))
   if (isnum<1){
