@@ -2,7 +2,7 @@ svdtools
 =====
 ### SVDTOOLS - tools for reducing and filtering matrices
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/jimeharrisjr/svdtools.svg?branch=master)](https://travis-ci.com/jimeharrisjr/svdtools)
+[![Build Status](https://travis-ci.com/jimeharrisjr/svdtools.svg?branch=main)](https://travis-ci.com/jimeharrisjr/svdtools)
 <!-- badges: end -->
 
 Single Value Decomposition is a useful tool for the analysis and filtering of matrices. I regularly use these SVD functions for things like:
