@@ -190,6 +190,57 @@ exclude_components<-function(mat, exclude=2:num_components(mat)){
 
 }
 
+#' Use Single Value Decomposition to split a matrix into two
+#'
+#' Take a numerical matrix and return two same-sized matrices using exclude_components
+#'
+#' @param mat A numeric matrix or a data frame coercible into a numeric matrix
+#' @param exclude A vector of integers specifying the components to exclude
+#' @return A named list with two matrices - remaining (inverse of excluded) and excluded (same as exclude_components)
+#' @examples
+#'
+#'
+#'\dontrun{
+#' m<-matrix(rbinom(100,5,.1),ncol=10)
+#' sm<-splitmatrix(m,2:4)
+#' m2<-round(sm$remaining+sm$excluded)
+#' m2<-apply(m2,c(1,2),as.integer)
+#' identical(m,m2) # Should be TRUE
+#'}
+#' @export
+split_matrix<-function(mat,comp){
+  numComp<-num_components(mat)
+  excl<-exclude[exclude %in% 1:numComp]
+  excllen<-length(excl)
+  if (excllen<1) {
+    stop('No valid exclude components selected')
+  }
+  if (excllen<length(exclude)){
+    warning('Some excluded components specified are invalid. Ignoring')
+  }
+
+  # First check the class of the mat object to see if it is a data frame, attempt coercion if so
+  if ('data.frame' %in% class(mat)) {
+    message('Object is a data frame. Attempting coersion')
+    mat<-as.matrix(mat)
+  }
+  # if the resulting object is not a matrix, stop
+  if (!'matrix' %in% class(mat)) stop('Input must be a numerical matrix, or coercible to a numerical matrix')
+  # Check to see if it is numeric, or if coercion to numeric results in NAs
+  isnum<-mean(apply(mat,c(1,2),is.numeric))
+  if (isnum<1){
+    warning('Matrix is not numeric. Attempting to coerce.')
+    mat<-apply(mat,c(1,2), as.numeric)
+    isna<-mean(apply(mat,c(1,2), is.na))
+    if(isna>0) stop('Object not coercible to a numeric matrix.')
+  }
+  n<-1:numComp
+  n<-n[!n %in% comp]
+  m1<-exclude_components(mat,n)
+  m2<-exclude_components(mat,comp)
+  return(list(remaining=m1,excluded=m2))
+}
+
 
 #' Plot the variance explained by each component of the SVD
 #'

@@ -1,7 +1,7 @@
 Package: svdtools
 Type: Package
 Title: SVD Tools for Matrices
-Version: 0.1.3
+Version: 0.2.0
 Author: James E. Harris, Jr 
 Maintainer: James E. Harris, Jr. <jimeharrisjr@gmail.com>
 Description: This package incldues some simple commands for reducing data in matrices through 
