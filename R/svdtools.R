@@ -208,7 +208,7 @@ exclude_components<-function(mat, exclude=2:num_components(mat)){
 #' identical(m,m2) # Should be TRUE
 #'}
 #' @export
-split_matrix<-function(mat,comp){
+split_matrix<-function(mat,exclude){
   numComp<-num_components(mat)
   excl<-exclude[exclude %in% 1:numComp]
   excllen<-length(excl)
@@ -235,9 +235,9 @@ split_matrix<-function(mat,comp){
     if(isna>0) stop('Object not coercible to a numeric matrix.')
   }
   n<-1:numComp
-  n<-n[!n %in% comp]
+  n<-n[!n %in% exclude]
   m1<-exclude_components(mat,n)
-  m2<-exclude_components(mat,comp)
+  m2<-exclude_components(mat,exclude)
   return(list(remaining=m1,excluded=m2))
 }
 
