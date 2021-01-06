@@ -4,7 +4,7 @@
 \alias{split_matrix}
 \title{Use Single Value Decomposition to split a matrix into two}
 \usage{
-split_matrix(mat, comp)
+split_matrix(mat, exclude)
 }
 \arguments{
 \item{mat}{A numeric matrix or a data frame coercible into a numeric matrix}
